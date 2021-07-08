@@ -1,0 +1,10 @@
+<div class="comments">
+  {{#each this}}
+  <section id="edit-comment" class="comments">
+  <div class="bg-white p-4 rounded-lg shadow-lg">
+    <h2 class=" meta text-1xl font-bold mb-2 text-gray-800">{{comments_text}}</h2>
+    <p class="text text-gray-600 mb-15">Posted by <a href="#" class="text-red-400">{{user.username}}</a> on {{ format_date created_at}}</p>
+  </div>
+  </section>
+  {{/each}}
+</div>

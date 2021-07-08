@@ -1,0 +1,25 @@
+<div class="post md:flex md:-mx-4">
+  <div class="w-full mb-2 md:w-full md:mx-4 lg:w-full border rounded shadow-sm">
+    <div class="px-4 py-4">
+      <div class="title">
+        <a href="/post/{{id}}">
+          <h3 class="font-semibold leading-tight text-2xl text-gray-800 hover:text-red-600">
+            {{title}}
+          </h3>
+        </a>
+      </div>
+      <hr class="border-gray-200 my-1 border-bottom" style="border: top width 1px;">
+      <p class="text-lg text-gray-900">
+        {{ post_content }}
+      </p>
+      <div class='flex text-gray-700 text-md '>
+        <div class="pr-3">{{format_date created_at}}</div>
+        <div>Posted by <span class="text-red-400">{{user.username}}</span></div>
+        <hr class="border-gray-200 my-1 border-bottom" style="border: top width 1px;">
+      </div>
+      <div class="flex text-gray-700 text-sm font-bold">
+        <p class="float-left">{{comments.length}} {{ format_plural "comment" comments.length}}</p>
+      </div>
+    </div>
+  </div>
+</div>
