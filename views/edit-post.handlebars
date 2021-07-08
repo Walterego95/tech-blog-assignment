@@ -1,0 +1,41 @@
+<article>
+  <h2 class="mt-2 mb-4 font-bold text-3xl">
+    Edit Blog
+  </h2>
+  <form class="edit-post-form">
+    <div class="m-2">
+      <h2 class="font-bold text-xl">Blog Title:</h2>
+      <input class="w-1/2 m-2 p-1 h-10 text-lg bg-gray-200 border rounded" name="post-title" type="text" value="{{post.title}}" />
+    </div>
+    <div class="m-2">
+      <h2 class="font-bold text-xl">Blog Content:</h2>
+      <input class="w-1/2 m-2 h-10 text-lg bg-gray-200 border rounded" name="post-content" type="text" value="{{post.post_content}}" />
+    </div>
+    <button class="m-4 bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded" type="submit">Save
+      post</button>
+    <button type="button"
+      class="delete-post-btn m-4 bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">Delete
+      post</button>
+  </form>
+</article>
+
+<form class="comments-form">
+  <div>
+    <textarea class="h-40 w-1/2 mb-2 md:w-1/2 md:mx-4 lg:w-1/2 border rounded shadow-sm"
+      name="comments-body"></textarea>
+  </div>
+
+  <div class="m-4">
+    <button class="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded" type="submit">add
+      comment</button>
+  </div>
+</form>
+
+{{> comments post.comments}}
+
+<a class="font-semibold leading-tight text-2xl text-gray-800 hover:text-red-600" href="/dashboard"> &larr; Back to
+  dashboard</a>
+
+<script src="/javascript/edit-post.js"></script>
+<script src="/javascript/delete-post.js"></script>
+<script src="/javascript/comments.js"></script>
