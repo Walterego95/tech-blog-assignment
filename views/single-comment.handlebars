@@ -1,0 +1,24 @@
+<li>
+  <form class="edit-comment p-5">
+    <div class="m-1 grid justify-items-start justify-center h-auto">
+      <div>
+        <p class="center text-2xl text-red-600 font-bold m-2 underline">Blog Title:</p>
+        <a class="text-2xl font-bold hover:text-white hover:bg-gray-800 rounded m-2 p-2"
+          href="/post/{{comment.post.id}}">{{comment.post.title}}</a>
+      </div>
+      <div class="w-full">
+        <p class="text-2xl text-red-600 font-bold m-2 underline">Your comment:</p>
+        <input class="w-full m-2 h-20 text-lg bg-gray-200 border rounded p-4" name="comment-content" type="text"
+          value="{{comment.comments_text}}" />
+        <p>Commented on: {{format_date comment.created_at}}</p>
+        <button class="m-4 bg-blue-300 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded"
+          type="submit">Save</button>
+        <button id="delete-comments-btn" type="button"
+          class="m-4 bg-red-300 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Delete</button>
+      </div>
+    </div>
+  </form>
+</li>
+
+<script src="/javascript/delete-comments.js"></script>
+<script src="/javascript/user-comments.js"></script>
