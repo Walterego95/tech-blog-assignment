@@ -1,0 +1,16 @@
+{{#if posts.length}}
+<section>
+  <h2 class="m-2 h-10 font-bold leading-tight text-2xl text-gray-800">Your Posts</h2>
+  <ol class="space-y-4">
+    {{#each posts as |post|}}
+    <li>
+      {{> post-info post}}
+      <a href="/dashboard/edit/{{post.id}}" class="m-2 inline-block align-baseline font-bold text-xl text-black hover:text-red-600 border rounded shadow-sm p-3 edit-link">Edit post</a>
+    </li>
+    {{/each}}
+  </ol>
+</section>
+{{/if}}
+
+<a href="/dashboard/create-posts" class="m-2 inline-block align-baseline font-bold text-xl text-black hover:text-red-600 border rounded shadow-sm p-3 edit-link">Create a new blog.</a>
+<a href="/dashboard/user-comments" class="m-2 inline-block align-baseline font-bold text-xl text-black hover:text-red-600 border rounded shadow-sm p-3 edit-link">View and edit your comments.</a>
