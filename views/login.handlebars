@@ -1,33 +1,29 @@
 <form class="login-form">
-  <div>
-    <label for="email-login">email:</label>
-    <input type="text" id="email-login" />
-  </div>
-  <div>
-    <label for="password-login">password:</label>
-    <input type="password" id="password-login" />
-  </div>
-  <div>
-    <button type="submit">login</button>
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
+    <div class="mb-4">
+      <label class="block text-grey-darker text-sm font-bold mb-2" for="username-login">
+        Username:
+      </label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="username-login"
+        type="text" placeholder="Username">
+    </div>
+    <div class="mb-6">
+      <label class="block text-grey-darker text-sm font-bold mb-2" for="password-login">
+        Password:
+      </label>
+      <input class="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
+        id="password-login" type="password" placeholder="******************">
+      <p class="text-red text-xs italic">Choose a password.</p>
+    </div>
+    <div class="flex items-center justify-between">
+      <button class="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded" type="submit">
+        Sign-In
+      </button>
+      <a class="inline-block align-baseline font-bold text-sm text-gray-600 hover:text-red-600" href="/sign-up">
+        Sign-Up
+      </a>
+    </div>
   </div>
 </form>
 
-
-<form class="signup-form">
-  <div>
-    <label for="username-signup">username:</label>
-    <input type="text" id="username-signup" />
-  </div>
-  <div>
-    <label for="email-signup">email:</label>
-    <input type="text" id="email-signup" />
-  </div>
-  <div>
-    <label for="password-signup">password:</label>
-    <input type="password" id="password-signup" />
-  </div>
-  <div>
-    <button type="submit">signup</button>
-  </div>
-</form>
-<script type="text/javascript" src="/javascript/login.js"></script>
+<script src="/javascript/login.js"></script>
