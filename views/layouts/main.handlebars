@@ -4,29 +4,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>tech blog</title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
+  <title>Tech Blog</title>
+  <link rel="stylesheet" href="/stylesheets/tailwind.css">
 </head>
 
-<body>
-  <div class="wrapper">
-    <header>
-      <h1>
-        <a href="/">tech blog</a>
+<body class="flex flex-col h-screen">
+    <header class="flex items-center justify-between flex-wrap bg-gray-800 p-6 text-white">
+      <h1 class="font-semibold text-xl tracking-tight">
+        Tech Blog
       </h1>
       <nav>
-        <button id="logout" class="btn-no-style">logout</button>
-        <a href="/login">login</a>
+        
+        <a class="inline-block rounded py-1 px-3 bg-white-200 text-white-800 hover:text-red-600 hover:bg-white-800 hover:border-white-500-rounded" href="/">Home</a>
+        <a class="inline-block rounded py-1 px-3 bg-white-200 text-white-800 hover:text-red-600 hover:bg-white-800 hover:border-white-500-rounded" href="/dashboard">Dashboard</a>
+        {{!-- If logged in don't show login button... --}}
+        {{#unless loggedIn}}
+        <a class="inline-block rounded py-1 px-3 bg-white-200 text-white-800 hover:text-red-600 hover:bg-white-800 hover:border-white-500-rounded" href="/login">Login</a>
+        {{/unless}}
+        {{!-- If logged create logout button... --}}
+        {{#if loggedIn}}
+        <button id="logout" class="btn-no-style inline-block rounded py-1 px-3 bg-white-200 text-white-800 hover:text-red-600 hover:bg-white-800 hover:border-white-500-rounded">Logout</button>
+        {{/if}}
       </nav>
     </header>
-    <main>
+    <main class="flex-grow">
       {{{ body }}}
     </main>
-    <footer>
-      Thanks for visiting!
+    <footer class="h-15 flex justify-center bg-gray-800 p-6 text-white font-semibold text-xl">
+      SuperTech!!!
     </footer>
-  </div>
-
+{{#if loggedIn}}
+<script src="/javascript/logout.js"></script>
+{{/if}}
 </body>
 
 </html>

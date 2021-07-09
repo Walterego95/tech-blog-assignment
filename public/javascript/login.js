@@ -1,3 +1,4 @@
+//login form function...
 async function loginFormHandler(event) {
   event.preventDefault();
 
@@ -22,6 +23,7 @@ async function loginFormHandler(event) {
   }
 }
 
+//sign-up form function...
 async function signupFormHandler(event) {
   event.preventDefault();
 
@@ -40,7 +42,7 @@ async function signupFormHandler(event) {
       headers: { 'Content-Type': 'application/json' }
     });
 
-    // check the response status
+    //check response status...
     if (response.ok) {
       console.log('success');
     } else {
@@ -48,6 +50,8 @@ async function signupFormHandler(event) {
     }
   }
 };
+
+//listeners to connect the async functions above with User Queries...
 
 document.querySelector('.login-form').addEventListener('submit', loginFormHandler);
 

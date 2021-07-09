@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post, Comment, Vote } = require('../../models');
+const { User, Post, Comments } = require('../../models');
 
 // get all users
 router.get('/', (req, res) => {
@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
     });
 });
 
+//get one user
 router.get('/:id', (req, res) => {
   User.findOne({
     attributes: { exclude: ['password'] },
@@ -22,21 +23,15 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: Post,
-        attributes: ['id', 'title', 'post_url', 'created_at']
+        attributes: ['id', 'title', 'post_content', 'created_at']
       },
       {
-        model: Comment,
-        attributes: ['id', 'comment_text', 'created_at'],
+        model: Comments,
+        attributes: ['id', 'comments_text', 'created_at'],
         include: {
           model: Post,
           attributes: ['title']
         }
-      },
-      {
-        model: Post,
-        attributes: ['title'],
-        through: Vote,
-        as: 'voted_posts'
       }
     ]
   })
@@ -53,14 +48,14 @@ router.get('/:id', (req, res) => {
     });
 });
 
+//create user
 router.post('/', (req, res) => {
-  // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
   User.create({
     username: req.body.username,
-    email: req.body.email,
     password: req.body.password
   })
     .then(dbUserData => {
+      //create cookie session
       req.session.save(() => {
         req.session.user_id = dbUserData.id;
         req.session.username = dbUserData.username;
@@ -75,17 +70,21 @@ router.post('/', (req, res) => {
     });
 });
 
+//login user
 router.post('/login', (req, res) => {
+  console.log(req.body);
   User.findOne({
+    
     where: {
-      email: req.body.email
+      username: req.body.username
     }
   }).then(dbUserData => {
     if (!dbUserData) {
-      res.status(400).json({ message: 'No user with that email address!' });
+      res.status(400).json({ message: 'No user found!' });
       return;
     }
 
+    //validate the password
     const validPassword = dbUserData.checkPassword(req.body.password);
 
     if (!validPassword) {
@@ -93,17 +92,21 @@ router.post('/login', (req, res) => {
       return;
     }
 
+    //save session
     req.session.save(() => {
-      // declare session variables
       req.session.user_id = dbUserData.id;
       req.session.username = dbUserData.username;
       req.session.loggedIn = true;
 
       res.json({ user: dbUserData, message: 'You are now logged in!' });
     });
-  });
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  })
 });
 
+//logout user and destroy cookie session
 router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
@@ -115,10 +118,8 @@ router.post('/logout', (req, res) => {
   }
 });
 
-
+//update user info
 router.put('/:id', (req, res) => {
-  // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
-
   // pass in req.body instead to only update what's passed through
   User.update(req.body, {
     individualHooks: true,
@@ -127,7 +128,7 @@ router.put('/:id', (req, res) => {
     }
   })
     .then(dbUserData => {
-      if (!dbUserData[0]) {
+      if (!dbUserData) {
         res.status(404).json({ message: 'No user found with this id' });
         return;
       }
@@ -139,6 +140,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
+//delete user not currently used but for later
 router.delete('/:id', (req, res) => {
   User.destroy({
     where: {
